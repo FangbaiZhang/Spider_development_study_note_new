@@ -1,6 +1,7 @@
 # Python爬虫开发与项目实战(学习笔记)
+# 
 
-# PDF电子文档放在配套资源文件夹中
+# PDF电子书文档放在python_work文件夹中的配套资源文件夹
 
 - This project is a study note of Spider Development ans Project Training.
 - 本项目是爬虫开发与项目实战的学习笔记.
