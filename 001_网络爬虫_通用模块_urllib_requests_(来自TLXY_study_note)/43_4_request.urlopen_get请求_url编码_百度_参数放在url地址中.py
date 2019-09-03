@@ -14,6 +14,7 @@ if __name__ == '__main__':
     qs = parse.urlencode(qs)
     print(qs)
 
+    # url编码后直接进行网址拼接
     fullurl = url + qs
     print(fullurl)
 
@@ -23,7 +24,7 @@ if __name__ == '__main__':
 
     html = rsp.read()
     html= html.decode()
-    print(html)
+    # print(html)
 
 
 
