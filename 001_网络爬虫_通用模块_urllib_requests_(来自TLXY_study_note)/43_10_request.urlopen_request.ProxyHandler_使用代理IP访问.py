@@ -11,7 +11,7 @@ if __name__ == '__main__':
     url = 'http://www.cnqiang.com/'
 
     # 使用代理的步骤
-    # 1.设置代理IP,进入代理网站选择一个IP:PORT
+    # 1.设置代理IP和端口号,进入代理网站选择一个IP:PORT
     proxy = {'http': '47.97.190.145:9999'}
     # 2.创建ProxyHandler
     proxy_handler = request.ProxyHandler(proxy)
