@@ -7,7 +7,43 @@
 - 本项目是爬虫开发与项目实战的学习笔记.
 
 - 前面几章很多都是学习过的内容，快速浏览
-- 参考书本和TLXY_study_note中的内容
+- 参考书本和002文件夹中002_4_Scrapy_project_爬虫实例(来自TLXY_study_note)的内容
+
+
+- 基础知识补充：(详细参考002中82.MD文件)
+
+- 爬虫项目创建流程
+    - 新建项目：scrapy startproject xxx(项目文件夹名称)      
+        - 打开CMD窗口，CD命令切换到要放置爬虫项目文件夹下面，然后执行上述命令
+        - 会自动创建爬虫项目的文件夹xxx,xxx文件夹里面还有一个xxx文件夹和scrapy.cfg文件
+        - xxx文件里面有一个spiders的文件夹，还有一些items.py等文件
+    - 明确需要的目标和产出：编写items.py
+    - 制作爬虫：地址 spider/xxspider.py
+    - 存储内容：pipelines.py
+    
+    - 比如ch12中的sht项目，手动创建了sht文件夹，激活虚拟含钾，cmd切换到sht中
+    - 使用：scrapy startproject shtspider创建项目，自动创建的项目结构
+        -shtspider # 项目文件主目录
+            -shtspider
+                -spiders
+                    -__init__.py
+                    -sht_spider.py  
+                -__init__.py
+                -items.py
+                -middlewares.py
+                -pipelines.py
+                -settings.py
+            -scrapy.cfg
+    注意1：sht_spider.py中爬虫的名称 name = 'sht'不能和项目文件名称shtspider相同
+    sht_spider.py也是自动创建的,里面的类class ShtSpider(RedisSpider):也是自动创建的
+    注意2：
+    from shtspider.items import ShtspiderItem导入模块的问题，
+    只需要把最上级的项目文件主目录shtspider右键Mark directory as sources root即可
+    标记后该文件会变成蓝色，内部的文件夹都会多一个空心黑圈圈，此时项目主文件夹就标记为了系统路径
+    导入模块时候都会到该文件夹中取查找
+    - 当然也可以使用sys.path添加文件夹进入到系统路径，pycharm直接更简单
+
+
 
 
 # 1 第一章 回顾Python编程
@@ -431,7 +467,7 @@
     bookhot
     test:PRIMARY>
      
-    
+ 
     
 
 
