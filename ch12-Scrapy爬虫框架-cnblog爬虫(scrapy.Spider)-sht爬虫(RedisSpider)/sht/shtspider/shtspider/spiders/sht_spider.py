@@ -5,7 +5,7 @@
 # 再次爬取时候需要检查allowed_domains和page_url将其更换为正确的网址
 # 下面注释中还有https://www.dsndsht23.com/，是之前的域名，已经失效
 
-# 注意sht是我手动创建的文件夹，cmd
+# 注意sht是我手动创建的文件夹，shtspider才是爬虫项目主文件夹
 
 import scrapy
 import re

@@ -255,19 +255,24 @@
     - db.python.find() 查找文档。可以使用条件语句
     - 参考书中内容和ch08中的图片
     
-    
-    
-
 
 # 9 第9章 动态网站抓取
 - 9.2 动态网站采集需要分析网页请求中网络中的JS数据，比较复杂不推荐
 - 9.3 PhantomJS已经不更新了，直接看9.4，推荐使用Selenium+Firefox/Chrome
-    - 参考以前TLXY的动态HTML的笔记和实例
+    - 参考以前TLXY的动态HTML的笔记和实例，即顶部的003文件夹
     - 参考我博文：https://blog.csdn.net/u011318077/article/details/86644430
     - 参考9.4中的实例
 - 9.4 Selenium+Firefox操作浏览器，一些常用操作和查找方法
     - 参考实例
 - 9.5 动态爬虫：爬去哪儿网
+
+- driver.page_source
+    # 返回整个页面元素
+    # 注意driver就是一个浏览器，请求页面上的静态动态内容都会显示出来
+    # 因此，page_source返回的是整个页面的elements，即开发工具看到的elements
+    # 动态请求源码没有，但是elements会有页面所有内容
+    # 因此可以使用xpath进行定位查找，对于动态请求页面不好直接查找的使用Selenium就可以解决
+    # 就是效率低了点
 
 # 10 第10章 Web终端协议分析
 - 网页登录POST分析

@@ -11,8 +11,8 @@ driver = webdriver.Chrome(chrome_options=options)
 driver.get('https://wenku.baidu.com/view/aa31a84bcf84b9d528ea7a2c.html')    #此处填写文章地址
 page = driver.find_element_by_xpath("//div[@id='html-reader-go-more']")
 driver.execute_script('arguments[0].scrollIntoView();', page)               #拖动网页到可见的元素去
-nextpage = driver.find_element_by_xpath("//span[@class='moreBtn goBtn']")
-nextpage.click()                                                            #进行点击下一页操作
+next_page = driver.find_element_by_xpath("//span[@class='moreBtn goBtn']")
+next_page.click()                                                            #进行点击下一页操作
 
 # ***对打开的html进行分析***
 html = driver.page_source
