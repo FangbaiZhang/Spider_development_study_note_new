@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import threading
-import getpass
 
 """
 info:
@@ -8,6 +6,12 @@ author:CriseLYJ
 github:https://github.com/CriseLYJ/
 update_time:2019-3-6
 """
+
+# 先读取本地cookies，如果cookies过期
+# 则读取图片验证码，然后手动输入验证码后登陆
+
+import threading
+import getpass
 import base64
 import hashlib
 import hmac
@@ -24,9 +28,9 @@ from PIL import Image
 
 class ZhihuAccount(object):
 
-    def __init__(self, username: str = None, password: str = None):
-        self.username = '18200116656'
-        self.password = 'zfb123456zfb'
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
         self.login_data = {
             'client_id': 'c3cef7c66a1843f8b3a9e6a1e3160e20',
@@ -203,5 +207,5 @@ class ZhihuAccount(object):
 
 
 if __name__ == '__main__':
-    account = ZhihuAccount('', '')
+    account = ZhihuAccount('18200116656', 'zfb123456zfb')
     account.login(captcha_lang='en', load_cookies=True)

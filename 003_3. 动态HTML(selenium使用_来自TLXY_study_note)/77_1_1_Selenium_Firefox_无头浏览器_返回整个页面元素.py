@@ -16,7 +16,7 @@ def main():
     # 注意driver就是一个浏览器，请求页面上的静态动态内容都会显示出来
     # 因此，page_source返回的是整个页面的elements，即开发工具看到的elements
     # 动态请求源码没有，但是elements会有页面所有内容
-    # 因此可以使用xpath进行定位查找，对于动态请求页面
+    # 对于动态请求页面，因此可以使用xpath进行定位查找
     print(driver.page_source)
     driver.close()
 
