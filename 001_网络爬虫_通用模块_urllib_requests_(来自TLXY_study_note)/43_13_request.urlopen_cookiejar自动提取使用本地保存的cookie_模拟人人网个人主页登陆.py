@@ -25,7 +25,7 @@ def login():
     '''
     # 登录用户地址，进入人人网登录首页，查看网页源码
     # 网页源码中打开查找，查找“下次自动登录”
-    # 然后向上找form，里面就有login-form
+    # 然后向上找form，里面就有提交表单的地址格式，login-form
     url = 'http://www.renren.com/PLogin.do'
 
     # 此键值需要从登录form的对应两个input中提取name属性

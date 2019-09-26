@@ -35,7 +35,7 @@ def login():
     # 把数据进行编码
     data = parse.urlencode(data)
 
-    # 创建一个请求对象
+    # 创建一个请求对象，传入用户名和密码数据
     req = request.Request(url, data=data.encode())
 
     # 使用opener发起请求,会自动提取我的cookie
