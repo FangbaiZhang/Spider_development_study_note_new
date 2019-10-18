@@ -7,8 +7,7 @@ import docx
 def read_json():
     # 读取json文件，加入到列表中,注意文件名称前面加一个r,去掉\作为转义符的含义，有时候需要路径打开要使用\
     # papers.json来自ch12爬取后存储的结果，复制到该目录下即可
-    file = open(r'D:\Hello World\python_work\Spider_development_study_note\ch12\sht\shtspider\shtspider\spiders\papers.json',
-                'r', encoding='utf-8')
+    file = open(r'papers.json', 'r', encoding='utf-8')
     papers = []
     for line in file.readlines():
         dic = json.loads(line)
@@ -20,7 +19,7 @@ def read_json():
     for paper in papers:
         mag = str(paper['title']) + ":\n" + str(paper['content'])
         file.add_paragraph(mag)
-    file.save('D:\Hello World\python_work\Spider_development_study_note\ch12\中文高清字幕.docx')
+    file.save('国产原创.docx')
 
 if __name__ == '__main__':
     read_json()
