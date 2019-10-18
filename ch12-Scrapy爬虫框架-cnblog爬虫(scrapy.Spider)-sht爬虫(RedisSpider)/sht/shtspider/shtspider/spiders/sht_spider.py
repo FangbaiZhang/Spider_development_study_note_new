@@ -32,7 +32,8 @@ class ShtSpider(RedisSpider):
     name = 'sht'
     allowed_domains = ['200sht.info']
 
-    # 网站更新后，只需要爬取某几页，可以将要爬取的页面放到开始网址中，然后关掉下面下一页的功能
+    # 网站更新后，只需要爬取固定的某几页，可以将要爬取的页面放到开始网址中，
+    # 然后注释掉下面爬取下一页的功能，就只会爬取开始列表中的几页
 
     '''
     start_urls = [
@@ -46,9 +47,9 @@ class ShtSpider(RedisSpider):
     # 打开CMD窗口，运行redis-cli连接到本地的redis-server
     # 设置起始URL的键和值，爬虫中只需设置键的名称，然后进入CMD窗口输入键和值，值就是起始URL
     # 可以在redis-cli一次性传入多个，这样就一次全部爬取了，但是这样就全部写入一个json文件了
-    # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.html   高清中文字幕
-    # lpush sht:start_urls https://www.dsndsht23.com/forum-2-1.html  国产原创
-    # lpush sht:start_urls https://www.dsndsht23.com/forum-107-1.html  三级写真
+    # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.html （高清中文字幕爬取的键值）
+    # lpush sht:start_urls https://www.dsndsht23.com/forum-2-1.html  （国产原创）
+    # lpush sht:start_urls https://www.dsndsht23.com/forum-107-1.html  （三级写真）
     # 现在redis-cli里面传入上面网址（成功后显示(integer) 1），然后启动主爬虫程序，爬取就开始了
     # 一个网址爬取结束后，向里面再次传入新的URL就可以继续爬取，设置键的名称，键的值启动爬虫后CMD中输入
     # 由于该网址是国外域名，可能开始请求几次会出现失败，爬虫自己会尝试不断请求，过一会儿就会成功
