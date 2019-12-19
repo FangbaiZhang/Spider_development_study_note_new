@@ -93,9 +93,9 @@ class ShtSpider(RedisSpider):
         try:
             image_url = soup.find('img', class_='zoom')
             magnet = soup.find('div', class_='blockcode').find('li')
-            # 提取出图片的地址和magnet值，file键对应的值就是网址
+            # 提取出图片的地址和magnet值，标签中的file属性对应的值就是网址
             image_urls = image_url['file']
-            content = magnet.string
+            content = magnet.string # 字符串就是下载地址
             item['image_urls'] = image_urls
             item['content'] = content
             yield item

@@ -9,5 +9,6 @@ if __name__ == '__main__':
     print(type(html))
     # 返回的字节，需要解码，解码以后是字符串,默认是UTF-8
     content = html.decode()
-    # print(content)
+    print(content)
     print(type(content))
+    # print(content)

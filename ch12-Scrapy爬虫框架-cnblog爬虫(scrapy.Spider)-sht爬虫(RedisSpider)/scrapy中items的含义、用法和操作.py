@@ -27,7 +27,7 @@ class CnblogspiderItem(scrapy.Item):
 
 # 创建一个CnblogspiderItem类的实例item
 # title="Python爬虫", content='爬虫开发'作为参数传递给Item类
-# 放进这个容器，进行结构化出力，并用Field对象声明，
+# 放进这个容器，进行结构化处理，并用Field对象声明，
 # 存储在一个容器中，用于之后的访问,存储之后的格式为一个字典
 
 item = CnblogspiderItem(title="Python爬虫", content="爬虫开发")
@@ -51,6 +51,7 @@ print(item2)
 print(type(item2))
 
 # dict和item的转换,上面的item2是一个Item类，现在转化后是一个字典
+# item2和dict_item打印结果一样，但是类型不同
 dict_item = dict(item)
 print(dict_item)
 print(type(dict_item))

@@ -19,7 +19,7 @@ class ShtspiderPipeline(object):
         # 判断item字典对象中title对应的是否还有值
         if item['title']:
             # 将item字典类型的数据转换成json格式的字符串,
-            # 注意json.dumps 序列化时对中文默认使用的ascii编码，要想写入中文，加上ensure_ascii=False
+            # 注意json.dumps序列化时对中文默认使用的ascii编码，要想写入中文，加上ensure_ascii=False
             line = json.dumps(dict(item), ensure_ascii=False) + "\n"
             self.file.write(line)
             return item
