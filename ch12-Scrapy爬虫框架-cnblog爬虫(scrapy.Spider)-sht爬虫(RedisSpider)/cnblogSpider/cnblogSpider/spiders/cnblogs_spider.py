@@ -36,7 +36,7 @@ class CnblogsSpider(scrapy.Spider):
         for paper in papers:
             # 提取出一篇文章的地址，标题，时间，和内容（就是标题）
             # .从paper下面开始选，//不管在什么位置，*所有的,class='postTitle'属性下a标签下href属性的第一个值
-            # .extract()[0]提取文字
+            # 直接返回的是一个slector列表，extract()返回的才是内容的列表，.extract()[0]提取文字
             url = paper.xpath(".//*[@class='postTitle']/a/@href").extract()[0]
             # .从paper下面开始选，//不管在什么位置，*所有的,class='postTitle'属性下a标签下的第一个文字内容
             title = paper.xpath(".//*[@class='postTitle']/a/text()").extract()[0]

@@ -1,7 +1,7 @@
 # 利用参数headers和params研究返回的内容
 # 研究返回的结果
 
-import  requests
+import requests
 
 # 完整的访问url是下面的url加上参数组成的完整url
 url = 'http://www.baidu.com/s?'

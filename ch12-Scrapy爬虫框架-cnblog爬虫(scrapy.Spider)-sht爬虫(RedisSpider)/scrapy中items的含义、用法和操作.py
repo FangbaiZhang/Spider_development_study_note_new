@@ -7,6 +7,8 @@ import scrapy
 class CnblogspiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    # url、title、time、content相当于字典里面键的名称，键的值就是后面爬虫里面获取的数据
+    # 每爬取一篇文章，都有相应的数据，组成为一个字典
     url = scrapy.Field()
     title = scrapy.Field()
     time = scrapy.Field()
