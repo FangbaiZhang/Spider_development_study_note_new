@@ -13,6 +13,7 @@ from scrapy.exceptions import DropItem
 
 class CnblogspiderPipeline(object):
     def __init__(self):
+        # 新建并打开一个文件，用于写入item内容
         self.file = open('papers.json', 'w', encoding='utf-8')
 
     def process_item(self, item, spider):
