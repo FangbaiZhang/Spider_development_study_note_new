@@ -37,7 +37,6 @@ headers = {'Content-Length': len(data)}
 
 # 构造一个Request类的实例，可以ctrl然后右键查看Request类的源代码
 req = request.Request(url=baseurl, data=data, headers=headers)
-
 # 已经构造了一个Request类的实例，然后用urlopen打开
 rsp = request.urlopen(req)
 json_data = rsp.read().decode('utf-8')

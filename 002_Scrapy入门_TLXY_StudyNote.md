@@ -38,7 +38,7 @@
         - 会自动创建爬虫项目的文件夹xxx,xxx文件夹里面还有一个xxx文件夹和scrapy.cfg文件
         - xxx文件里面有一个spiders的文件夹，还有一些items.py等文件
     - 明确需要的目标和产出：编写items.py
-    - 制作爬虫：地址 spider/xxspider.py
+    - 制作爬虫：spiders/xxx_spider.py
     - 存储内容：pipelines.py
     
     - 比如ch12中的sht项目，手动创建了sht文件夹，激活虚拟含钾，cmd切换到sht中
@@ -55,14 +55,14 @@
                 -settings.py
             -scrapy.cfg
     注意1：sht_spider.py中爬虫的名称 name = 'sht'不能和项目文件名称shtspider相同
-    sht_spider.py也是自动创建的,里面的类class ShtSpider(RedisSpider):也是自动创建的
+    sht_spider.py文件是自动创建的,里面的类class ShtSpider(RedisSpider):也是自动创建的
     注意2：
     from shtspider.items import ShtspiderItem导入模块的问题，
     只需要把最上级的项目文件主目录shtspider右键Mark directory as sources root即可
     标记后该文件会变成蓝色，内部的文件夹都会多一个空心黑圈圈，此时项目主文件夹就标记为了系统路径
     导入模块时候都会到该文件夹中取查找
 
-# 2. Scrapy部件 
+# 2. Scrapy常用部件(需要我们手写的部件ItemPipeline和Spider) 
 
 # 2.1. ItemPipeline
 
@@ -95,8 +95,7 @@
     - allow_domains: spider允许爬取的域名列表
     - log: 日志记录
     
-# 2.3. DownloaderMiddleware（中间件）
-
+# 2.3. DownloaderMiddleware（下载器中间件一般不需要手写）
 - 中间件是处于引擎和下载器中间的一层组件
 - 可以有很多个，被按循序加载执行
 - 作用是对发出的请求和返回的结果进行预处理
@@ -109,9 +108,9 @@
         - 在request通过的时候被调用
         - 必须返回None或Response或Request或raise IgnoreRequest
     - process_response(self, request, response, spider)
+   
     
 # 3. 爬虫去重
-
 - 去重
     - 为了防止爬虫陷入死循环，需要去重
     - 即在spider中的parse函数中，返回request的时候加上dont_filter=False参数
@@ -143,7 +142,7 @@
 # 4. 简单实例（爬取一条名言）
 - 创建一个简单的爬虫实例 
     - 第一步：创建一个scrapy项目
-        - 创建命令：scrapy startproject mingyan2(mingyan2是我取的项目文件夹名称)      
+        - 爬虫项目创建命令：scrapy startproject mingyan2(mingyan2是我取的项目文件夹名称)      
         - 打开CMD窗口，CD命令切换到要放置爬虫项目文件夹下面，然后执行上述命令
         - 执行命令及文件夹下面的有哪些东西参考: 爬虫1.png 爬虫2.png     
     - 第二步：编写爬虫的主程序py文件
