@@ -3,11 +3,11 @@
 
 # 提取第一层页面中下一页的连接，下一页就是每个搜索分页面的连接地址
 # LinkExtractor传入XPATH参数查找下一页的连接
-# 爬虫会自动从response中不断查找下一页连接，该处支只传入了起始网址，只能找到一个下一页
+# 爬虫会自动从response中不断查找下一页连接，该处只传入了起始网址，只能找到一个下一页
 
 
 # 找到下一页连接XPATH的规律，发现只有li标签的位置不一样，但是分析源码发现
-# 其实都是ul标签下最后一个li标签，地址a标签的href中
+# 其实都是ul标签下最后一个li标签，地址就在a标签的href中
 '''
 /html/body/div[2]/div[4]/div[55]/div/div/div/ul/li[13]/a
 /html/body/div[2]/div[4]/div[55]/div/div/div/ul/li[8]/a

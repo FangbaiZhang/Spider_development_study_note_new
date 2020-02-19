@@ -14,8 +14,8 @@
         - https://doc.scrapy.org/en/latest/#
         
 - scrapy安装
-    - 安装参考
-    - Scrapy安装说明及如何避坑
+    - scrapy需要依赖Twisted异步库，安装之前需要先安装，pycharm或pip如果安装失败
+    - 可以下载whl文件到本地，安装参考博文Scrapy安装说明及如何避坑
     - https://blog.csdn.net/u011318077/article/details/86661924  
     
 - scrapy概述
