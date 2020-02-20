@@ -24,14 +24,18 @@ class YunqicrawlPipeline(object):
             replicaset=crawler.settings.get('REPLICASET')
         )
 
+    # 爬虫开启时候执行该函数，仅执行一次，连接数据库
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri, replicaset=self.replicaset)
         self.db = self.client[self.mongo_db]
 
+    # 爬虫关闭时候执行该函数，仅执行一次，关闭数据库连接
     def close_spider(self, spider):
         self.client.close()
 
+
     def process_item(self, item, spider):
+        # 判断item是否属于YunqiBookListItem，属于它，就将item数据存入数据库
         if isinstance(item, YunqiBookListItem):
             self._process_booklist_item(item)
         else:

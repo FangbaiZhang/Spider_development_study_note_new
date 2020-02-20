@@ -26,9 +26,11 @@ class ShtspiderPipeline(object):
         else:
             raise DropItem("Missing title in %s" % item)
 
+
+# 标准的图片下载管道
 class MyImagesPipeline(ImagesPipeline):
 
-    # 获取图片的url,然后下载图片
+    # 获取图片的url,然后下载图片，scrapy.Request会根据图片url自动请求获取图片数据下载图片到设置的文件夹中
     def get_media_requests(self, item, info):
         # for image_url in item['image_urls']:
         yield scrapy.Request(item['image_urls'], meta={'item': item})
@@ -43,7 +45,7 @@ class MyImagesPipeline(ImagesPipeline):
     # 图片重命名
     def file_path(self, request, response=None, info=None):
         item = request.meta['item']
-        filename = u'full/{}.jpg'.format(item['title'])
+        filename = u'full/{}.jpg'.format(item['title']) # 使用帖子标题作为图片名称
         return filename
 
 

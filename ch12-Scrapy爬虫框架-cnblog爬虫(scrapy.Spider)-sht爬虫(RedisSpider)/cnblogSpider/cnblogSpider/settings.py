@@ -21,7 +21,7 @@ NEWSPIDER_MODULE = 'cnblogSpider.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
-# Configure maximum concurrent requests performed by Scrapy_工作原理_组件介绍 (default: 16)
+# Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
