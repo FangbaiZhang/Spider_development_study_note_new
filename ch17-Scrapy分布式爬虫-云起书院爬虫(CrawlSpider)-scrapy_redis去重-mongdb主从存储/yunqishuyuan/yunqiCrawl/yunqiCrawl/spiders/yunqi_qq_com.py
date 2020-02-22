@@ -12,11 +12,12 @@ from yunqiCrawl.items import YunqiBookDetailItem
 class YunqiQqComSpider(CrawlSpider):
     name = 'yunqi.qq.com'
     allowed_domains = ['yunqi.qq.com']
-    # 先查看书库：http://yunqi.qq.com/bk，然后向后面点几页，发现网址就是p后面的页码不同
+    # 先查看书库：http://yunqi.qq.com/bk，然后向后面点几页，发现网址就是p后面的页码不同，图书列表页规律相同
+    # 直接传入规律，就不用解析完一个清单页面，然后再找下一页地址了
     start_urls = ['http://yunqi.qq.com/bk/so2/n30p1']
 
     # 将书库网址规律加入到规则中，会自动爬取满足规律的所有网址，和以前的解析下一页类似，
-    # 每个网址都回调parse_book_list方法进行解析
+    # 只需要传入图书列表网址的每一页，每个网址都回调parse_book_list方法进行解析
     rules = (
         Rule(LinkExtractor(allow=r'/bk/so2/n30p\d+'), callback='parse_book_list', follow=True),
     )
@@ -64,7 +65,7 @@ class YunqiQqComSpider(CrawlSpider):
                 novelWords=novelWords,
                 novelImageUrl=novelImageUrl,
             )
-            # 生成bookListItem，用于存放书单中每一本书的信息
+            # 生成bookListItem，用于存放书单中每一本书的基本信息
             yield bookListItem
 
             # 进入一本书，解析一本书的详细信息
@@ -99,6 +100,7 @@ class YunqiQqComSpider(CrawlSpider):
             novelWeekClick=novelWeekClick, novelWeekPopular=novelWeekPopular,
             novelWeekComm=novelWeekComm, novelCommentNum=novelCommentNum,
         )
+        # 生成bookDetailItem，用于每一本书的详细信息
         yield bookDetailItem
 
 if __name__ == '__main__':

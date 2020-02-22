@@ -19,7 +19,7 @@ baseurl = 'https://fanyi.baidu.com/sug'
 wd = input('Input your keyword: ')
 data = {'kw': wd}
 
-# 43_5中需要对data进行编码，编码为字节
+# 43_5中需要对data进行编码， 编码为字节
 # data = parse.urlencode(data).encode('utf-8')
 # requests中可以直接使用字典格式的data
 rsp = requests.post(baseurl, data=data)

@@ -1,6 +1,7 @@
 # coding: utf-8
 import scrapy
 from scrapy import Selector
+import re
 from cnblogSpider.items import CnblogspiderItem
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
@@ -60,10 +61,12 @@ class CnblogsSpider(scrapy.Spider):
             # 最终得到的就是一个item字典对象，实际返回的就是一个容器，里面存储着分析网页得到的各种数据
             yield request
 
-        next_page = Selector(response).re(u'<a href="(\S*)">下一页</a>')
+        # 爬取下一页，先查找下一页的连接地址
+        # 下一页源码格式：<a href="https://www.cnblogs.com/qiyeboy/default.html?page=2">下一页</a>
+        next_page = re.findall(u'<a href="(\S*)">下一页</a>', response.content.decode())[0]  # \S 匹配任何非空白字符，*尽可能多的匹配
         if next_page:
             # url为请求的对象，callback为回调方法，指定由谁来解析请求的响应
-            yield scrapy.Request(url=next_page[0], callback=self.parse)
+            yield scrapy.Request(url=next_page, callback=self.parse)
 
     def parse_body(self, response):
         # 取出前面已经封装好的Item对象，里面已经包含了URL、标题、时间和摘要

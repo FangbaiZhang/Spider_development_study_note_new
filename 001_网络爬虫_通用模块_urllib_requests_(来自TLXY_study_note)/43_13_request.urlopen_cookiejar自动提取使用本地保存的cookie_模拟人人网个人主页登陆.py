@@ -29,7 +29,7 @@ def login():
     url = 'http://www.renren.com/PLogin.do'
 
     # 此键值需要从登录form的对应两个input中提取name属性
-    data = {'email': '908851835@qq.com', 'password': 'zfb123456'}
+    data = {'email': '908851835@qq.com', 'password': 'zfb123456zfb'}
 
     # 把数据进行编码
     data = parse.urlencode(data)
