@@ -72,12 +72,12 @@ ITEM_PIPELINES = {
 }
 
 # ShtspiderPipeline用于下载ITEM中的文字数据到本地
-# 上面添加了ImagesPipeline用于下载图片
+# 上面添加了自定义的ImagesPipeline管道用于下载图片
 # 设置图片的下载地址，图片地址，文件结果信息，并可制作大小缩略图
 IMAGES_STORE = 'D:\Hello World\python_work\Spider_development_study_note\ch12\sht\shtimages'
-IMAGES_URLS_FIELD = 'image_urls' # 图片地址
-IMAGES_REULT_FIELD = 'images'    # 图片文件
-IMAGES_THUMBS = {
+IMAGES_URLS_FIELD = 'image_urls' # 下载图片的地址来源
+IMAGES_REULT_FIELD = 'images'    # 图片文件的scrapy.Field()
+IMAGES_THUMBS = {                # 设置要存储的缩略图大小，不写就是没有缩略图，只有原始大小图片
     'small': (50, 50),
     'big': (270, 270),
 }
