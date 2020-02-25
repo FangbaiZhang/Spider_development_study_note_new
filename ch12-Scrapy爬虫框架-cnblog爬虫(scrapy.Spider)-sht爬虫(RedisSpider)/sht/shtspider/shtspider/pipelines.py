@@ -42,9 +42,10 @@ class MyImagesPipeline(ImagesPipeline):
             raise DropItem("Item contains no images")
         return item
 
-    # 图片重命名
+    # 定义文件存储的路径，对图片重命名
     def file_path(self, request, response=None, info=None):
         item = request.meta['item']
+        # full/是文件夹路径，full/就是放在settings中存储文件夹下面开始，然后full文件夹里面存放图片
         filename = u'full/{}.jpg'.format(item['title']) # 使用帖子标题作为图片名称
         return filename
 

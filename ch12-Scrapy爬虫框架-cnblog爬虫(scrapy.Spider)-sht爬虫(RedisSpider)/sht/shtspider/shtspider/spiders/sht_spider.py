@@ -48,7 +48,7 @@ class ShtSpider(RedisSpider):
     # 打开CMD窗口，输入redis-cli连接到本地的redis-server
     # 或者直接WIN+R中运行redis-cli
     # 设置起始URL的键和值，爬虫中只需设置键的名称，然后进入CMD窗口输入键和值，值就是起始URL
-    # 可以在redis-cli一次性传入多个，这样就一次全部爬取了，但是这样就全部写入一个json文件了
+    # 可以在redis-cli一次性传入多个，这样就一次全部爬取了，但是这样就全部写入一个json文件了,可以爬取完成后再爬取下一次，管道中将json文件重新命名
     # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.html （高清中文字幕爬取的键值）
     # lpush sht:start_urls https://www.dsndsht23.com/forum-2-1.html  （国产原创）
     # lpush sht:start_urls https://www.dsndsht23.com/forum-107-1.html  （三级写真）
@@ -56,6 +56,7 @@ class ShtSpider(RedisSpider):
     # 一个网址爬取结束后，向里面再次传入新的URL就可以继续爬取，设置键的名称，键的值启动爬虫后CMD中输入
     # 由于该网址是国外域名，可能开始请求几次会出现失败，爬虫自己会尝试不断请求，过一会儿就会成功
     # 启动后要等待1分钟左右，可能更长，才会大量开始爬取
+    # redis爬虫键的名称。值就是初始URL
     redis_key = 'sht:start_urls'
 
 
