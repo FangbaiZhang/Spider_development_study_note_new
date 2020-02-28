@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy_redis.pipelines.RedisPipeline':301,
+    'scrapy_redis.pipelines.RedisPipeline':301, # scrapy-redis默认的pipeline，权限在自定义之后
     'shtspider.pipelines.ShtspiderPipeline': 300,
     'shtspider.pipelines.MyImagesPipeline': 1,
 
@@ -109,22 +109,24 @@ IMAGES_THUMBS = {                # 设置要存储的缩略图大小，不写就
 # 第一遍运行后，已经爬取过的数据都会存储在redis数据库中，然后再次运行，由于都是爬取过的，爬虫会迅速结束，
 # 有新的内容才会继续爬取
 SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
-# （可选参数）在Redis中保持scrapy-redis用到的各个队列，从而允许暂停和暂停后恢复
+# （可选参数）数据是否持久化，程序停止数据保存，下次启动数据继续使用
+# 在Redis中保持scrapy-redis用到的各个队列，从而允许暂停和暂停后恢复
 SCHEDULER_PERSIST = True
-# 使用scrapy_redis的去重方式
+# 使用scrapy_redis的指纹去重方式
 DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
 # 使用scrapy_redis的存储方式,见上面ITEM_PIPELINES，并将顺序设置成最后一个，用于存储下载所有的数据
 # 定义Redis的IP和端口
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 
+
 # 注意，改造成分布式爬虫后，传人URL，已经爬取过的ITEM会存储在本地服务器中
 # 如果再次传入的网址，里面已经爬过的就直接过滤了，不会重复爬取，要想从头开始爬取，要删除redis中的相关数据
 # 可以在redis中输入keys * 查看所有的键
 # 使用del keyname 删除键及对应的值
-# 127.0.0.1:6379> del sht:items
+# 127.0.0.1:6379> del sht:items          # 爬取到的item信息
 # (integer) 1
-# 127.0.0.1:6379> del sht:dupefilter
+# 127.0.0.1:6379> del sht:dupefilter     # 已爬取过的requests对象的指纹信息   sht:requests 待爬取的requests对象
 # (integer) 1
 
 # 使用flushall可以删除所有本地所有的键值数据
