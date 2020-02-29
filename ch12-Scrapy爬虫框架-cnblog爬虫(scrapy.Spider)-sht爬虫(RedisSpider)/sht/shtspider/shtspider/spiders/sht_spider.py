@@ -105,7 +105,7 @@ class ShtSpider(RedisSpider):
 
 # 命令行可以启动爬虫，我们也可以添加爬虫启动程序process，使用以下三行代码启动爬虫
 # 启动主程序，干货都来了
-# redis爬虫，先启动redis，传入要爬取的网址后再启动爬虫主程序
+# redis爬虫，先启动redis，传入要爬取的网址后再启动爬虫主程序(也可以启动爬虫后再传入网址，redis会等待传入键值)
 # 启动后要等待1分钟左右，可能更长，才会大量开始爬取
 if __name__ == '__main__':
     process = CrawlerProcess(get_project_settings())
