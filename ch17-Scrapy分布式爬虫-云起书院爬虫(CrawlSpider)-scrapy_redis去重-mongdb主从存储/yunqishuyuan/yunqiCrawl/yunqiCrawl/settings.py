@@ -159,6 +159,21 @@ MONGO_DATABASE='yunqi'
 REPLICASET = 'test'
 
 
+
+
+# 如果只是连接本地MongoDB默认数据库(数据直接存储本地MongoDBs数据库中)，不使用副本集，使用以下写法
+# 只需要将数据库接口改成mongodb默认端口即可，其它全部不变
+# 虽然是使用默认的一个数据库，没有使用副本集，但是副本集还是要写上
+# 因为pipelines.py里面连接数据库需要副本集这个参数
+# MONGO_URI = 'mongodb://127.0.0.1:27017'
+# # 副本集中的数据库名称
+# MONGO_DATABASE='yunqinew'
+# 副本集(MongoDB创建的一个副本集群)名称
+# REPLICASET = 'test'
+
+
+
+
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {

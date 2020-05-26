@@ -1,6 +1,4 @@
 # coding: utf-8
-# 下载一个网址中的图片，该网址中的图片都是小图，必须点击图片后，才能弹出放大后的图片
-# 因此，考虑将图片全部下载下来后再看
 # 由于网站是国外服务器，在线查看图片都要慢慢下载展开，所以该代码下载图片也很慢
 
 import requests
@@ -42,7 +40,7 @@ def downpicture():
             t1 = list(str(t))
             filename = ''.join(t1[0:10]) + '.jpg'
             with open(filename, 'wb') as f:
-                f.write(pic.content) # content代表图片的值
+                f.write(pic.content) # content代表图片的值，将图片内如写入jpg文件,就是图片
             print(filename + "下载完成")
 
 

@@ -33,7 +33,7 @@ class MyImagesPipeline(ImagesPipeline):
     # 获取图片的url,然后下载图片，scrapy.Request会根据图片url自动请求获取图片数据下载图片到设置的文件夹中
     def get_media_requests(self, item, info):
         # for image_url in item['image_urls']:
-        yield scrapy.Request(item['image_urls'], meta={'item': item})
+        yield scrapy.Request(item['image_urls'], meta={'item': item}) # 将图片的地址传进来
 
     # 确认图片是否下载完成或者没有下载
     def item_completed(self, results, item, info):
