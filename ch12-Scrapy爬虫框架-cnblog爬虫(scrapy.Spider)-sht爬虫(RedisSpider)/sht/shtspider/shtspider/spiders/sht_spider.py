@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 # 一个福利网站资源爬取
 
+# 使用说明：
+# 1. 修改该代码文件中allowed_domains和page_url为有效的域名
+# 2. 爬虫启动在CMD窗口中进行，具体参考下面说明
+# 3. 种子连接下载后会自动生成一个json文件保存在该项目目录下，json文件转为为word文件，查看ch00中实例
+# 4. 下载的图片以帖子标题命名保存在shtimages文件夹目录下
+# 5. 分布式爬虫爬取过的会自动过滤，完成一次全新爬取，需要删除本地键值，具体查看改代码末尾说明
+
 # 由于网站经常更换域名，爬虫会很快失效
-# 再次爬取时候需要检查allowed_domains和page_url将其更换为正确的网址
+# 再次爬取时候需要检查修改2处：allowed_domains和page_url将其更换为正确的网址
 # 下面注释中还有https://www.dsndsht23.com/，是之前的域名，已经失效
 
-# 注意sht是我手动创建的文件夹，shtspider才是爬虫项目主文件夹
+# 注意sht是我手动创建的文件夹，shtspider文件夹才是爬虫项目主文件夹
 
 import scrapy
 import re
@@ -30,8 +37,8 @@ from scrapy_redis.spiders import RedisSpider
 
 class ShtSpider(RedisSpider):
     name = 'sht'
-    # 修改1：主域名要检查更改
-    allowed_domains = ['sdfasf.space']
+    # 修改地方1：主域名要检查更改为新的有效域名
+    allowed_domains = ['98zudisw.xyz']
 
     # 网站更新后，只需要爬取固定的某几页，可以将要爬取的页面放到开始网址中，
     # 然后注释掉下面爬取下一页的功能，就只会爬取开始列表中的几页
@@ -48,8 +55,8 @@ class ShtSpider(RedisSpider):
     # 打开CMD窗口，输入redis-cli连接到本地的redis-server
     # 或者直接WIN+R中运行redis-cli
     # 设置起始URL的键和值，爬虫中只需设置键的名称，然后进入CMD窗口输入键和值，值就是起始URL
-    # 可以在redis-cli一次性传入多个，这样就一次全部爬取了，但是这样就全部写入一个json文件了,可以爬取完成后再爬取下一次，管道中将json文件重新命名
-    # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.html （高清中文字幕爬取的键值）
+    # 可以在redis-cli一次性传入多个，这样就一次全部爬取了，但是这样就全部写入一个json文件了,可以爬取完一个分论坛再爬取下一个论坛，管道中将json文件重新命名即可
+    # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.html （高清中文字幕首页爬取的键值）
     # lpush sht:start_urls https://www.dsndsht23.com/forum-2-1.html  （国产原创）
     # lpush sht:start_urls https://www.dsndsht23.com/forum-107-1.html  （三级写真）
     # 现在redis-cli里面传入上面网址（成功后显示(integer) 1），然后启动主爬虫程序，爬取就开始了
@@ -62,9 +69,10 @@ class ShtSpider(RedisSpider):
 
     def parse(self, response):
         # 网页主域名（网站首页），用于后面网址的拼接
-        # 修改2：主页域名爬取要进行检查更新
-        page_url = 'https://www.sdfasf.space/'
+        # 修改地方2：主页域名爬取要进行检查修改为新的主域名
+        page_url = 'https://www.98zudisw.xyz/'
         soup = BeautifulSoup(response.text, 'html.parser', from_encoding='utf-8')
+        # 先获取一页下面所有的帖子
         papers = soup.find_all('a', class_="s xst", href=re.compile(r'thread-.*'))
         for paper in papers:
             old_url = paper['href']
@@ -87,7 +95,7 @@ class ShtSpider(RedisSpider):
         except Exception:
             print("所有主页面爬取结束！")
 
-
+    # 进入一个帖子，获取里面的内容
     def parse_body(self, response):
         item = response.meta['item']
         soup = BeautifulSoup(response.text, 'html.parser', from_encoding='utf-8')

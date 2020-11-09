@@ -27,7 +27,7 @@ class ShtspiderPipeline(object):
             raise DropItem("Missing title in %s" % item)
 
 
-# 定义标准的图片下载管道，通用方法，其它爬虫直接复制过去，注意settings中要设置存储图片的位置以及缩略图大小
+# 定义标准的图片下载管道，通用方法，其它爬虫直接复制过去，注意settings.py中要设置存储图片的位置以及缩略图大小
 class MyImagesPipeline(ImagesPipeline):
 
     # 获取图片的url,然后下载图片，scrapy.Request会根据图片url自动请求获取图片数据下载图片到设置的文件夹中

@@ -12,7 +12,7 @@ if __name__ == '__main__':
     url = 'http://www.renren.com/574862780'
     rsp = request.urlopen(url)
     html = rsp.read().decode('UTF-8')
-    # 将打开的网页保存为html文件，然后浏览器打开
+    # 将打开的网页保存为html文件，然后浏览器打开，打开后是人人网主页
     with open('43_11_rsp.html', 'w') as f:
         f.write(html)
 
