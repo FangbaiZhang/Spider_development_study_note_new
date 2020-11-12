@@ -2,6 +2,7 @@ import json
 import docx
 
 # 将json文件读取出来，然后提取部分内容，最后写入到word文件中
+# 将json文件复制到改代码文件目录下
 
 # 由于文件中有多行，直接读取会出现错误，因此一行一行读取
 def read_json():
@@ -14,10 +15,11 @@ def read_json():
         papers.append(dic)
     print(len(papers))
 
-    # 提取列表中的部分内容，写入到docx文件中
+    # 提取列表中的下载地址内容，写入到docx文件中
     file = docx.Document()
     for paper in papers:
         mag = str(paper['title']) + ":\n" + str(paper['content'])
+        # 添加方式写入，自动换行
         file.add_paragraph(mag)
     file.save('国产原创.docx')
 

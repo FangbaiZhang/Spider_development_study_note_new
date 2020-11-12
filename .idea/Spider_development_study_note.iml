@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ch17-Scrapy分布式爬虫-云起书院爬虫(CrawlSpider)-scrapy_redis去重-mongdb主从存储/yunqishuyuan/yunqiCrawl" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ch12-Scrapy爬虫框架-cnblog爬虫(scrapy.Spider)-sht爬虫(RedisSpider)/cnblogSpider" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ch12-Scrapy爬虫框架-cnblog爬虫(scrapy.Spider)-sht爬虫(RedisSpider)/sht/shtspider" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ch12-Scrapy爬虫-cnblog(scrapy.Spider)-sht(RedisSpider)/sht/shtspider" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
