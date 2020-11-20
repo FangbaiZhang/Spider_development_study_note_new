@@ -78,13 +78,12 @@ class ShtSpider(RedisSpider):
     # redis爬虫键的名称。值就是初始URL
     redis_key = 'sht:start_urls'
 
-
     def parse(self, response):
         # 网页主域名（网站首页），用于后面网址的拼接
         # 修改地方2：主页域名爬取要进行检查修改为新的主域名
         page_url = 'https://www.98zudisw.xyz/'
         soup = BeautifulSoup(response.text, 'html.parser', from_encoding='utf-8')
-        # 先获取一页下面所有的帖子
+        # 先获取一页下面所有的帖子的标签
         papers = soup.find_all('a', class_="s xst", href=re.compile(r'thread-.*'))
         for paper in papers:
             old_url = paper['href']
@@ -93,9 +92,13 @@ class ShtSpider(RedisSpider):
             # full_url = 'https://www.dsndsht23.com/' + url
             url = urljoin(page_url, old_url)
             # full_url = 'https://www.dsndsht23.com/' + url
+            # paper标签里面的text内容就是帖子标题
             title = paper.get_text()
+            # 将帖子链接地址和标题传递给item
             item = ShtspiderItem(url=url, title=title)
+            # 定义一个request，用于解析每一个帖子详细内容，同时传递item
             request = scrapy.Request(url=url, meta={'item': item}, callback=self.parse_body)
+            # 使用生成器yield，循环请求
             yield request
 
 
@@ -105,6 +108,7 @@ class ShtSpider(RedisSpider):
         next_page_url = page_url + next_page['href']
         try:
             if next_page:
+                # 如果有下一页的地址，下一页继续调用parse方法进行解析
                 yield scrapy.Request(url=next_page_url, callback=self.parse)
         except Exception:
             print("所有主页面爬取结束！")
@@ -154,11 +158,15 @@ class ShtSpider(RedisSpider):
             content = magnet.string # 字符串就是magnet值
             image_urls.append(image_url_cover)
             image_urls.append(image_url_detail)
+
+            # 将上面提取到的所有内容传递给item
             item['image_urls'] = image_urls
             item['image_url_cover'] = image_url_cover
             item['image_url_detail'] = image_url_detail
             item['content'] = content
+            # 使用生成器，循环生成item
             yield item
+
         except Exception:
             print("所有分页面爬取结束！")
     # '''
