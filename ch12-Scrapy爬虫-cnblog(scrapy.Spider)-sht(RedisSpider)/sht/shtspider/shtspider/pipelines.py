@@ -63,7 +63,8 @@ class MyImagesPipeline(ImagesPipeline):
 # '''
 
 # 以下代码为第二种方式：获取封面图片和内容图片
-# 定义标准的图片下载管道，通用方法，其它爬虫直接复制过去，注意settings.py中要设置存储图片的位置以及缩略图大小
+# 定义标准的图片下载管道，下面都是内置的通用方法，我们只是对其进行自定义修改，
+# 其它爬虫直接复制过去，注意settings.py中要设置存储图片的位置以及缩略图大小
 # 自定义图片下载管道类，继承内置的 ImagesPipeline 类
 class MyImagesPipeline(ImagesPipeline):
 
@@ -77,7 +78,7 @@ class MyImagesPipeline(ImagesPipeline):
             print("正在下载" + item['title']) # 一个帖子两张图片，会打印输出两次相同的结果
             yield scrapy.Request(image_url, meta={'item': item}) # 将图片的地址传进来，请求下载
 
-    # 确认图片是否下载完成或者没有下载
+    # 内置的标准方法，用来确认图片是否下载完成或者没有下载
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
         if not image_paths:
