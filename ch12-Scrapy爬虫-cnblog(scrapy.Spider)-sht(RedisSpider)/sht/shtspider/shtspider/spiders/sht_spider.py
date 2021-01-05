@@ -41,9 +41,11 @@ class ShtSpider(RedisSpider):
     allowed_domains = ['98zudisw.xyz']
 
     # 推荐使用以下方式1：
-    # 网站更新后，只需要爬取固定的某几页，可以将要爬取的页面放到开始网址中，lpush要爬取的页面，可以一次编辑好命令后传进去
+    # 网站地址更新后，只需要爬取固定的某几页，可以将要爬取的页面放到开始网址中，lpush要爬取的页面，可以一次编辑好命令后传进去
     # 直接复制首页，后面几页就是URL中一个数字的变化
-    # 然后注释掉下面爬取下一页的功能，就只会爬取开始列表中的几页，redis里面直接
+    # 然后注释掉下面爬取下一页的功能，就只会爬取开始列表中的几页，redis里面直接传入要爬取的那几个页面即可
+    # 比如只爬取前三页，start_urls传入多个地址，就类似传入一个列表，每个地址中间空一格即可，可以先txt中编辑好，然后复制到cmd命令行中即可
+    # 127.0.0.1:6379> lpush sht:start_urls https://www.dsndsht23.com/forum-103-1.htm sht:start_urls https://www.dsndsht23.com/forum-103-2.html sht:start_urls https://www.dsndsht23.com/forum-103-3.html
 
     # 方式2：(适用于主域名还没有变化的情况)
     # 备注：由于本地redis中已经缓存了爬取的内容，包含网址和item内容
@@ -52,8 +54,9 @@ class ShtSpider(RedisSpider):
     # 或者在每一页时候，判断一下帖子日期(将日期数字提取拼接成数字，然后判断大小)，
     # 帖子顶部有发帖日期，解析帖子详细内容时候，先判断日期，日期前的跳过，日期后的提取详细内容
 
-    # redis爬虫也可以只爬取某几页，还是注释掉下面的start_urls，然后要注释掉爬取下一页的代码，
-    # 然后lpush sht:start_urls 中依次传入要爬取的那几个网址即可，比如只爬取第一页，第二页、、、、，可以一次传入多个
+    # redis爬虫也可以只爬取某几页，还是注释掉下面的start_urls，然后要注释掉爬取next_page下一页部分的代码，
+    # 然后lpush sht:start_urls 中依次传入要爬取的那几个网址即可，比如只爬取第一页，第二页、、、、，也可以一次传入多个
+
 
     '''
     start_urls = [
